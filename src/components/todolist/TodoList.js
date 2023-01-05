@@ -1,10 +1,11 @@
 import React from "react";
 import Todo from "./Todo";
 import TodoCreate from "./TodoCreate";
+import styled from "styled-components";
 
 const TodoList = () => {
   return (
-    <form>
+    <TodoListLayout>
       <fieldset>
         <legend>할일목록</legend>
         <h1>TodoList</h1>
@@ -15,8 +16,12 @@ const TodoList = () => {
           </li>
         </ul>
       </fieldset>
-    </form>
+    </TodoListLayout>
   );
 };
 
 export default TodoList;
+
+const TodoListLayout = styled.form`
+  flex-grow: 1;
+`;
