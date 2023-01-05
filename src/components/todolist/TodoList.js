@@ -7,7 +7,7 @@ const TodoList = () => {
   return (
     <TodoListLayout>
       <fieldset>
-        <legend>할일목록</legend>
+        <legend className="sr-only">할일목록</legend>
         <h1>TodoList</h1>
         <TodoCreate />
         <ul>

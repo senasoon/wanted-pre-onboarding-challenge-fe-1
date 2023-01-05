@@ -1,12 +1,22 @@
 import React from "react";
+import styled from "styled-components";
 
 const TodoCreate = () => {
   return (
     <>
-      <input />
-      <button>추가하기</button>
+      <TodoCreateInput />
+      <TodoCreateButton>추가하기</TodoCreateButton>
     </>
   );
 };
 
 export default TodoCreate;
+
+const TodoCreateInput = styled.input`
+  margin-right: 10px;
+`;
+
+const TodoCreateButton = styled.button`
+  width: 6rem;
+  height: 2rem;
+`;

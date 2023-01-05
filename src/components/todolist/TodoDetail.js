@@ -3,16 +3,16 @@ import styled from "styled-components";
 
 const TodoDetail = () => {
   return (
-    <section>
+    <TodoDetailLayout>
       <fieldset>
-        <legend>할일상세</legend>
-        <h1>TodoDetail</h1>
+        <legend className="sr-only">할일상세</legend>
+        <TodoDetailTitle>TodoDetail</TodoDetailTitle>
         <button>상태버튼</button>
         <button>수정버튼</button>
         <button>삭제버튼</button>
         <p>음악 듣기</p>
       </fieldset>
-    </section>
+    </TodoDetailLayout>
   );
 };
 
@@ -20,4 +20,8 @@ export default TodoDetail;
 
 const TodoDetailLayout = styled.section`
   flex-grow: 1;
+`;
+
+const TodoDetailTitle = styled.h1`
+  font-size: 2em;
 `;

@@ -4,7 +4,7 @@ const Login = () => {
   return (
     <form>
       <fieldset>
-        <legend>로그인</legend>
+        <legend className="sr-only">로그인</legend>
         <label for="id">아이디</label>
         <input name="id" id="id" />
         <label for="password">비밀번호</label>

@@ -4,7 +4,7 @@ const SignUp = () => {
   return (
     <form>
       <fieldset>
-        <legend>회원가입</legend>
+        <legend className="sr-only">회원가입</legend>
         <label for="id">아이디</label>
         <input name="id" id="id" />
         <label for="password">비밀번호</label>
