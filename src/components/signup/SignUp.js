@@ -1,7 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const SignUp = () => {
+  const [email, setEmail] = useState("");
+  const [validEmail, setValidEmail] = useState(false);
+
+  const [password, setPassword] = useState("");
+  const [validPassword, setValidPassword] = useState(false);
+
+  useEffect(() => {
+    email.includes("@") && email.includes(".")
+      ? setValidEmail(true)
+      : setValidEmail(false);
+  }, [email]);
+
+  useEffect(() => {
+    password.length >= 8 ? setValidPassword(true) : setValidPassword(false);
+  }, [password]);
+
+  const emailChangeHandler = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const passwordChangeHandler = (e) => {
+    setPassword(e.target.value);
+  };
+
   return (
     <SignUpForm>
       <SignUpLayout>
@@ -9,13 +33,37 @@ const SignUp = () => {
         <SignUpTitle>회원가입</SignUpTitle>
         <div>
           <InputLabel htmlFor="id">아이디</InputLabel>
-          <input name="id" id="id" />
+          <input
+            type="text"
+            name="id"
+            id="id"
+            placeholder="이메일 형식으로 입력하세요."
+            onChange={emailChangeHandler}
+            autoComplete="off"
+          />
         </div>
+        {email.length > 0 && !validEmail && (
+          <InvalidMessage>
+            이메일 형식으로 입력해주세요. (@과 .이 포함)
+          </InvalidMessage>
+        )}
         <div>
           <InputLabel htmlFor="password">비밀번호</InputLabel>
-          <input name="password" id="password" />
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="8자 이상 입력하세요."
+            autoComplete="off"
+            onChange={passwordChangeHandler}
+          />
         </div>
-        <SignUpButton>회원가입</SignUpButton>
+        {password.length > 0 && !validPassword && (
+          <InvalidMessage>8자 이상 입력해주세요.</InvalidMessage>
+        )}
+        <SignUpButton disabled={!validEmail || !validPassword ? true : false}>
+          회원가입
+        </SignUpButton>
       </SignUpLayout>
     </SignUpForm>
   );
@@ -58,7 +106,15 @@ const SignUpButton = styled.button`
   padding: 2px 0;
   border-radius: 50px;
   border: 0;
-  background-color: #2f5fef;
+  background-color: ${(props) => (props.disabled ? "gray" : "#2f5fef")};
   color: #fff;
   font-weight: bold;
+  cursor: ${(props) => (props.disabled ? "default" : "pointer")};
+`;
+
+const InvalidMessage = styled.span`
+  width: 378px;
+  font-size: 14px;
+  color: #2962ff;
+  font-weight: 600;
 `;
