@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { BsFillPencilFill, BsFillTrashFill } from "react-icons/bs";
 
 const TodoDetail = () => {
   return (
@@ -7,9 +8,12 @@ const TodoDetail = () => {
       <fieldset>
         <legend className="sr-only">할일상세</legend>
         <TodoDetailTitle>TodoDetail</TodoDetailTitle>
-        <button>상태버튼</button>
-        <button>수정버튼</button>
-        <button>삭제버튼</button>
+        <TodoUpdateButton>
+          <BsFillPencilFill />
+        </TodoUpdateButton>
+        <TodoDeleteButton>
+          <BsFillTrashFill />
+        </TodoDeleteButton>
         <p>음악 듣기</p>
       </fieldset>
     </TodoDetailLayout>
@@ -24,4 +28,23 @@ const TodoDetailLayout = styled.section`
 
 const TodoDetailTitle = styled.h1`
   font-size: 2em;
+`;
+
+const TodoUpdateButton = styled.button`
+  width: 20px;
+  height: 20px;
+  padding: 10px;
+  border: 0;
+  background: none;
+  font-size: 20px;
+  margin-right: 10px;
+`;
+
+const TodoDeleteButton = styled.button`
+  width: 20px;
+  height: 20px;
+  padding: 4px;
+  border: 0;
+  background: none;
+  font-size: 20px;
 `;

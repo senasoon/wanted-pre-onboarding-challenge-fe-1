@@ -19,4 +19,10 @@ const TodoCreateInput = styled.input`
 const TodoCreateButton = styled.button`
   width: 6rem;
   height: 2rem;
+  padding: 2px 0;
+  border-radius: 50px;
+  border: 0;
+  background-color: #2f5fef;
+  color: #fff;
+  font-weight: bold;
 `;

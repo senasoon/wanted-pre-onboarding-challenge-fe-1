@@ -16,4 +16,5 @@ export default MainPage;
 
 const MainLayout = styled.div`
   display: flex;
+  padding: 10px 20px;
 `;
