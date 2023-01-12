@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import useSignUp from "../../hooks/useSignUp";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -7,6 +8,12 @@ const SignUp = () => {
 
   const [password, setPassword] = useState("");
   const [validPassword, setValidPassword] = useState(false);
+
+  const { mutate } = useSignUp();
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    mutate({ email, password });
+  };
 
   useEffect(() => {
     email.includes("@") && email.includes(".")
@@ -27,7 +34,7 @@ const SignUp = () => {
   };
 
   return (
-    <SignUpForm>
+    <SignUpForm onSubmit={onSubmitHandler}>
       <SignUpLayout>
         <legend className="sr-only">회원가입</legend>
         <SignUpTitle>회원가입</SignUpTitle>
