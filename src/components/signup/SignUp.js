@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import useSignUp from "../../hooks/useSignUp";
+import useSignUp from "../../hooks/auth/useSignUp";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");

@@ -1,7 +1,7 @@
 import { useMutation } from "react-query";
-import { signUp } from "../api/api";
+import { signUp } from "../../api/api";
 import { useNavigate } from "react-router-dom";
-import { setLocalStorage } from "../utils/LocalStorage";
+import { setLocalStorage } from "../../utils/LocalStorage";
 
 const useSignUp = () => {
   const navigate = useNavigate();
