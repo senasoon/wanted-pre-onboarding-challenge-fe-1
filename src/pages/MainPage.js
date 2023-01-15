@@ -1,15 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import TodoList from "../components/todolist/TodoList";
 import TodoDetail from "../components/todolist/TodoDetail";
 import styled from "styled-components";
-import { getLocalStorage } from "../utils/LocalStorage";
+import { getLocalStorage, removeLocalStorage } from "../utils/LocalStorage";
+import { useNavigate } from "react-router-dom";
 
 const MainPage = () => {
-  let isToken = !!getLocalStorage("token");
+  const [isToken, setIsToken] = useState(!!getLocalStorage("token"));
+  const navigate = useNavigate();
+  const logoutHandler = () => {
+    removeLocalStorage("token");
+    setIsToken(false);
+  };
 
   return (
     <MainLayout>
-      <LoginLogoutButton isToken={isToken}>
+      <LoginLogoutButton
+        isToken={isToken}
+        onClick={isToken ? logoutHandler : () => navigate("/login")}
+      >
         {isToken ? "로그아웃" : "로그인"}
       </LoginLogoutButton>
       <TodoList />
