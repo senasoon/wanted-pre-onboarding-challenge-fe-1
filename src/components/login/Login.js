@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import useLogin from "../../hooks/auth/useLogin";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -25,8 +26,16 @@ const Login = () => {
   const passwordChangeHandler = (e) => {
     setPassword(e.target.value);
   };
+
+  const { mutate } = useLogin();
+
+  const loginHandler = (e) => {
+    e.preventDefault();
+    mutate({ email, password });
+  };
+
   return (
-    <LoginForm>
+    <LoginForm onSubmit={loginHandler}>
       <LoginLayout>
         <legend className="sr-only">로그인</legend>
         <LoginTitle>로그인</LoginTitle>
