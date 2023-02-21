@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import useLogin from "../../hooks/auth/useLogin";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -72,6 +73,7 @@ const Login = () => {
         <LoginButton disabled={!validEmail || !validPassword ? true : false}>
           로그인
         </LoginButton>
+        <SignUpButton to="/signup">회원가입</SignUpButton>
       </LoginLayout>
     </LoginForm>
   );
@@ -125,4 +127,21 @@ const InvalidMessage = styled.span`
   font-size: 14px;
   color: #2962ff;
   font-weight: 600;
+`;
+
+const SignUpButton = styled(Link)`
+  width: 378px;
+  height: 2rem;
+  padding: 2px 0;
+  border-radius: 50px;
+  border: 0;
+  background-color: #2f5fef;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  line-height: 2rem;
+  vertical-align: middle;
+  text-decoration: none;
+  font-size: 13px;
 `;
