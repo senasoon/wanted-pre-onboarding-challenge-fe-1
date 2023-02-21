@@ -1,8 +1,13 @@
-import React from "react";
-import styled from "styled-components";
-import { BsFillPencilFill, BsFillTrashFill } from "react-icons/bs";
+import React from 'react';
+import styled from 'styled-components';
+import { BsFillPencilFill, BsFillTrashFill } from 'react-icons/bs';
+import useGetTodoById from '../../hooks/todo/useGetTodoById';
+import { useParams } from 'react-router-dom';
 
 const TodoDetail = () => {
+  const params = useParams().id;
+  const { data: getTodo } = useGetTodoById(params);
+
   return (
     <TodoDetailLayout>
       <fieldset>
@@ -14,7 +19,8 @@ const TodoDetail = () => {
         <TodoDeleteButton>
           <BsFillTrashFill />
         </TodoDeleteButton>
-        <p>음악 듣기</p>
+        <TodoTitle>{getTodo?.title}</TodoTitle>
+        <p>{getTodo?.content}</p>
       </fieldset>
     </TodoDetailLayout>
   );
@@ -23,7 +29,7 @@ const TodoDetail = () => {
 export default TodoDetail;
 
 const TodoDetailLayout = styled.section`
-  flex-grow: 1;
+  text-align: center;
 `;
 
 const TodoDetailTitle = styled.h1`
@@ -47,4 +53,9 @@ const TodoDeleteButton = styled.button`
   border: 0;
   background: none;
   font-size: 20px;
+`;
+
+const TodoTitle = styled.h2`
+  font-size: 1.5rem;
+  color: #2f5fef;
 `;
