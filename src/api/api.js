@@ -8,8 +8,7 @@ export const getTodos = () => api.get('/todos');
 export const getTodoById = (id) => api.get(`/todos/${id}`);
 export const createTodo = ({ title, content }) =>
   api.post('/todos', { title, content });
-export const updateTodo = (id, { title, content }) =>
-  api.put(`/todos/${id}`, { title, content });
+export const updateTodo = ({ id, data }) => api.put(`/todos/${id}`, data);
 export const deleteTodo = (id) => api.delete(`/todos/${id}`);
 
 // Auth Api
