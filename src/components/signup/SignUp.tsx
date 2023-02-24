@@ -1,17 +1,22 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-import useLogin from "../../hooks/auth/useLogin";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import useSignUp from 'hooks/auth/useSignUp';
 
-const Login = () => {
-  const [email, setEmail] = useState("");
+const SignUp = () => {
+  const [email, setEmail] = useState('');
   const [validEmail, setValidEmail] = useState(false);
 
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState('');
   const [validPassword, setValidPassword] = useState(false);
 
+  const { mutate } = useSignUp();
+  const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    mutate({ email, password });
+  };
+
   useEffect(() => {
-    email.includes("@") && email.includes(".")
+    email.includes('@') && email.includes('.')
       ? setValidEmail(true)
       : setValidEmail(false);
   }, [email]);
@@ -20,26 +25,19 @@ const Login = () => {
     password.length >= 8 ? setValidPassword(true) : setValidPassword(false);
   }, [password]);
 
-  const emailChangeHandler = (e) => {
+  const emailChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
 
-  const passwordChangeHandler = (e) => {
+  const passwordChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   };
 
-  const { mutate } = useLogin();
-
-  const loginHandler = (e) => {
-    e.preventDefault();
-    mutate({ email, password });
-  };
-
   return (
-    <LoginForm onSubmit={loginHandler}>
-      <LoginLayout>
-        <legend className="sr-only">로그인</legend>
-        <LoginTitle>로그인</LoginTitle>
+    <SignUpForm onSubmit={onSubmitHandler}>
+      <SignUpLayout>
+        <legend className="sr-only">회원가입</legend>
+        <SignUpTitle>회원가입</SignUpTitle>
         <div>
           <InputLabel htmlFor="id">아이디</InputLabel>
           <input
@@ -70,18 +68,17 @@ const Login = () => {
         {password.length > 0 && !validPassword && (
           <InvalidMessage>8자 이상 입력해주세요.</InvalidMessage>
         )}
-        <LoginButton disabled={!validEmail || !validPassword ? true : false}>
-          로그인
-        </LoginButton>
-        <SignUpButton to="/signup">회원가입</SignUpButton>
-      </LoginLayout>
-    </LoginForm>
+        <SignUpButton disabled={!validEmail || !validPassword ? true : false}>
+          회원가입
+        </SignUpButton>
+      </SignUpLayout>
+    </SignUpForm>
   );
 };
 
-export default Login;
+export default SignUp;
 
-const LoginForm = styled.form`
+const SignUpForm = styled.form`
   width: 500px;
   height: 300px;
   padding: 10px 20px;
@@ -91,7 +88,7 @@ const LoginForm = styled.form`
   transform: translate(-50%, -50%);
 `;
 
-const LoginLayout = styled.fieldset`
+const SignUpLayout = styled.fieldset`
   width: 100%;
   height: 100%;
   display: flex;
@@ -101,7 +98,7 @@ const LoginLayout = styled.fieldset`
   gap: 20px;
 `;
 
-const LoginTitle = styled.h1`
+const SignUpTitle = styled.h1`
   margin: 0;
 `;
 
@@ -110,16 +107,16 @@ const InputLabel = styled.label`
   width: 80px;
 `;
 
-const LoginButton = styled.button`
+const SignUpButton = styled.button`
   width: 378px;
   height: 2rem;
   padding: 2px 0;
   border-radius: 50px;
   border: 0;
-  background-color: ${(props) => (props.disabled ? "gray" : "#2f5fef")};
+  background-color: ${(props) => (props.disabled ? 'gray' : '#2f5fef')};
   color: #fff;
   font-weight: bold;
-  cursor: ${(props) => (props.disabled ? "default" : "pointer")};
+  cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
 `;
 
 const InvalidMessage = styled.span`
@@ -127,21 +124,4 @@ const InvalidMessage = styled.span`
   font-size: 14px;
   color: #2962ff;
   font-weight: 600;
-`;
-
-const SignUpButton = styled(Link)`
-  width: 378px;
-  height: 2rem;
-  padding: 2px 0;
-  border-radius: 50px;
-  border: 0;
-  background-color: #2f5fef;
-  color: #fff;
-  font-weight: bold;
-  cursor: pointer;
-  text-align: center;
-  line-height: 2rem;
-  vertical-align: middle;
-  text-decoration: none;
-  font-size: 13px;
 `;
