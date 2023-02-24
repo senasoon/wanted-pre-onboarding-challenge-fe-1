@@ -1,8 +1,9 @@
 import React from 'react';
-import Todo from './Todo';
-import TodoCreate from './TodoCreate';
+import TodoItem from 'components/todolist/TodoItem';
+import TodoCreate from 'components/todolist/TodoCreate';
 import styled from 'styled-components';
-import useTodos from '../../hooks/todo/useGetTodos';
+import useTodos from 'hooks/todo/useGetTodos';
+import { Todo } from 'types/todo';
 
 const TodoList = () => {
   const { data: todos } = useTodos();
@@ -11,9 +12,9 @@ const TodoList = () => {
       <h1>TodoList</h1>
       <TodoCreate />
       <ul>
-        {todos?.data.data.map((todo) => (
+        {todos?.data.data.map((todo: Todo) => (
           <li key={todo.id}>
-            <Todo {...todo} />
+            <TodoItem {...todo} />
           </li>
         ))}
       </ul>

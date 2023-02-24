@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import useCreateTodo from '../../hooks/todo/useCreateTodo';
+import useCreateTodo from 'hooks/todo/useCreateTodo';
 
 const TodoCreate = () => {
   const [todoInputValue, setTodoInputValue] = useState({
@@ -8,17 +8,17 @@ const TodoCreate = () => {
     content: '',
   });
 
-  const titleChangeHandler = (e) => {
+  const titleChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTodoInputValue({ ...todoInputValue, title: e.target.value });
   };
 
-  const contentChangeHandler = (e) => {
+  const contentChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTodoInputValue({ ...todoInputValue, content: e.target.value });
   };
 
   const { mutate: createTodo } = useCreateTodo();
 
-  const submitHandler = (e) => {
+  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     createTodo({
       title: todoInputValue.title,

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import TodoList from '../components/todolist/TodoList';
+import TodoList from 'components/todolist/TodoList';
 import styled from 'styled-components';
-import { getLocalStorage, removeLocalStorage } from '../utils/LocalStorage';
+import { getLocalStorage, removeLocalStorage } from 'utils/LocalStorage';
 import { useNavigate } from 'react-router-dom';
 
 const MainPage = () => {
-  const [isToken, setIsToken] = useState(!!getLocalStorage('token'));
+  const [isToken, setIsToken] = useState<boolean>(!!getLocalStorage('token'));
   const navigate = useNavigate();
   const logoutHandler = () => {
     removeLocalStorage('token');
@@ -32,7 +32,7 @@ const MainLayout = styled.div`
   padding: 10px 20px;
 `;
 
-const LoginLogoutButton = styled.button`
+const LoginLogoutButton = styled.button<{ isToken: boolean }>`
   margin: 10px;
   padding: 5px 10px;
   position: absolute;
