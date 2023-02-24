@@ -2,8 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import ModalPortal from './ModalPortal';
 import useDeleteTodo from '../../hooks/todo/useDeleteTodo';
+import { ModalProps } from 'types/modal';
 
-const Modal = ({ toggleModal, id }) => {
+const Modal = ({ toggleModal, id }: ModalProps) => {
   const { mutate: deleteTodo } = useDeleteTodo();
 
   const submitHandler = () => {

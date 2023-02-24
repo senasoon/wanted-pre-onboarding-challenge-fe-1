@@ -1,6 +1,6 @@
 import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
-import { deleteTodo } from '../../api/api';
+import { deleteTodo } from 'api/api';
 
 const useDeleteTodo = () => {
   const navigate = useNavigate();

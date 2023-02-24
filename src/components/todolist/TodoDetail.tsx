@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { BsFillPencilFill, BsFillTrashFill } from 'react-icons/bs';
-import useGetTodoById from '../../hooks/todo/useGetTodoById';
+import useGetTodoById from 'hooks/todo/useGetTodoById';
 import { useParams } from 'react-router-dom';
-import useUpdateTodo from '../../hooks/todo/useUpdateTodo';
-import Modal from '../modal/Modal';
+import useUpdateTodo from 'hooks/todo/useUpdateTodo';
+import Modal from 'components/modal/Modal';
 
 const TodoDetail = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -13,24 +13,25 @@ const TodoDetail = () => {
     content: '',
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const id = useParams().id;
+  const id = useParams().id!;
 
   const { data: getTodo } = useGetTodoById(id);
   const { mutate: updateTodo } = useUpdateTodo();
 
-  const titleChangeHandler = (e) => {
+  const titleChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTodoInputValue({ ...todoInputValue, title: e.target.value });
   };
 
-  const contentChangeHandler = (e) => {
+  const contentChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTodoInputValue({ ...todoInputValue, content: e.target.value });
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     updateTodo({
       id: id,
-      data: { title: todoInputValue.title, content: todoInputValue.content },
+      title: todoInputValue.title,
+      content: todoInputValue.content,
     });
     setIsEditing(!isEditing);
   };
